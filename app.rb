@@ -1,7 +1,3 @@
-require 'sinatra'
-require 'data_mapper'
-require 'pry' if development?
-
 enable :sessions
 
 helpers do
