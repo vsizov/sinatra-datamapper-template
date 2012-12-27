@@ -1,9 +1,8 @@
 require 'sinatra'
-require 'datamapper'
-require 'rack-flash'
+require 'data_mapper'
+require 'pry' if development?
 
 enable :sessions
-use Rack::Flash
 
 helpers do
   # TODO: Put helpers here.
@@ -11,15 +10,32 @@ end
 
 DataMapper.setup(:default, ENV['DATABASE_URL'] || "sqlite://#{Dir.pwd}/my.db")
 
-# TODO: Add database models here.
+class Text
+  include DataMapper::Resource
+
+  property :id, Serial
+  property :content, Text
+  property :hidden_content, Text
+  property :step, Integer
+  property :created_at, DateTime
+  property :updated_at, DateTime
+
+  validates_presence_of :content
+
+  before :update do
+    updated_at = DateTime.now
+  end
+
+end
 
 DataMapper.finalize
 DataMapper.auto_upgrade!
 
 get '/' do
+  @texts = Text.all
   erb :index
 end
 
-get '/*' do
+get '/create' do
   erb :not_found
 end
