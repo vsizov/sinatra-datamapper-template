@@ -2,7 +2,8 @@ source 'http://rubygems.org'
 
 gem 'sinatra'
 gem 'data_mapper'
-gem 'sqlite3-ruby'
+gem 'sqlite3'
+gem 'haml'
 gem 'dm-sqlite-adapter'
 
 group :development do

@@ -1,0 +1,14 @@
+%h2 Add new entity
+%form.form-horizontal{:action => "/create", :method => "post"}
+  .control-group
+    %label.control-label
+      Text
+    .controls
+      %textarea.input-xxlarge{:rows => 6, :cols => 40, :name => "content"}
+    
+  .control-group
+    %label.control-label
+      Text
+    .controls
+      %input{:type => :submit}
+

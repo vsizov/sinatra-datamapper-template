@@ -27,11 +27,16 @@ end
 DataMapper.finalize
 DataMapper.auto_upgrade!
 
-get '/' do
+get "/" do
   @texts = Text.all
-  erb :index
+  haml :index
 end
 
-get '/create' do
-  erb :not_found
+get '/new' do
+  haml :new
+end
+
+post '/create' do
+  Text.create(params)
+  redirect "/new"
 end
